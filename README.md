@@ -4,7 +4,7 @@ An Elixir API client for [Stytch](https://stytch.com)
 
 ## Installation
 
-The package can be installed by adding `stytch` to your list of 
+The package can be installed by adding `stytch` to your list of
 dependencies in `mix.exs`:
 
 ```elixir
@@ -30,7 +30,7 @@ config :stytch,
   secret: "my-secret"
 ```
 
-The default endpoint for API requests is https://test.stytch.com/v1 and in 
+The default endpoint for API requests is https://test.stytch.com/v1 and in
 prod environments is https://api.stytch.com/v1 but these can be
 overridden by the `STYTCH_ENDPOINT` environment variable or `:endpoint`
 config option.
@@ -41,6 +41,19 @@ The docs can be found at <https://hexdocs.pm/stytch>.
 
 ### Magic Links
 
+```elixir
+Stytch.send_magic_link("sandbox@stytch.com")
+
 ```
-Stytch.Client.send_magic_link("sandbox@stytch.com")
+
+### One-time Passcodes (OTP)
+
+```elixir
+Stytch.send_otp_by_sms("+10000000000")
+```
+
+### Time-based one-time passcodes (TOTP)
+
+```elixir
+Stytch.create_totp("user-id-....")
 ```

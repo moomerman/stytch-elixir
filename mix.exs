@@ -9,7 +9,7 @@ defmodule Stytch.MixProject do
       start_permanent: Mix.env() == :prod,
       deps: deps(),
       name: "Stytch",
-      description: "API Client for Stytch",
+      description: "An Elixir API Client for Stytch",
       source_url: "https://github.com/moomerman/stytch-ex",
       package: package()
     ]
@@ -18,8 +18,7 @@ defmodule Stytch.MixProject do
   # Run "mix help compile.app" to learn about applications.
   def application do
     [
-      extra_applications: [:logger],
-      mod: {Stytch.Application, []}
+      extra_applications: [:logger]
     ]
   end
 
