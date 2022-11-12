@@ -4,12 +4,12 @@ defmodule Stytch.MixProject do
   def project do
     [
       app: :stytch,
-      version: "0.1.0",
+      version: "0.1.1",
       elixir: "~> 1.14",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
       name: "Stytch",
-      description: "API Client for Stytch.com",
+      description: "API Client for Stytch",
       source_url: "https://github.com/moomerman/stytch-ex",
       package: package()
     ]
@@ -25,7 +25,7 @@ defmodule Stytch.MixProject do
 
   defp package() do
     [
-      files: ~w(lib mix.exs README* LICENSE*),
+      files: ~w(lib config mix.exs README* LICENSE*),
       links: %{GitHub: "https://github.com/moomerman/stytch-ex"},
       licenses: ["MIT"]
     ]

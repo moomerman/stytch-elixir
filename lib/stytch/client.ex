@@ -62,7 +62,7 @@ defmodule Stytch.Client do
   # ONE-TIME PASSCODES (OTP)
 
   @doc """
-    See: https://stytch.com/docs/api/sms-otp-overview
+    See: https://stytch.com/docs/api/send-otp-by-sms
   """
   def send_otp_by_sms(phone_number, opts \\ %{}) do
     "/otps/sms/send"
@@ -225,7 +225,7 @@ defmodule Stytch.Client do
   def post(path, body), do: req() |> Req.post!(url: path, json: body)
 
   defp req(), do: Req.new(base_url: endpoint(), auth: {username(), password()})
-  defp endpoint, do: System.get_env("STYTCH_ENDPOINT")
-  defp username, do: System.get_env("STYTCH_PROJECT_ID")
-  defp password, do: System.get_env("STYTCH_SECRET")
+  defp endpoint, do: Application.get_env(:stytch, :endpoint)
+  defp username, do: Application.get_env(:stytch, :project_id)
+  defp password, do: Application.get_env(:stytch, :secret)
 end
