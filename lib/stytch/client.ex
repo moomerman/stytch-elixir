@@ -12,13 +12,31 @@ defmodule Stytch.Client do
   def get(path, params \\ []), do: req() |> Req.get(url: path, params: params) |> response()
   def post(path, body), do: req() |> Req.post(url: path, json: body) |> response()
 
-  defp response({:ok, %Req.Response{status: status} = res}) when status >= 200 and status < 300,
-    do: {:ok, %Stytch.Response{headers: res.headers, body: res.body, status: res.status}}
+  defp response({:ok, %Req.Response{status: status} = res}) when status >= 200 and status < 300 do
+    {:ok,
+     %Stytch.Response{headers: res.headers, body: atomize_keys(res.body), status: res.status}}
+  end
 
-  defp response({:ok, res}),
-    do: {:error, %Stytch.Response{headers: res.headers, body: res.body, status: res.status}}
+  defp response({:ok, res}) do
+    {:error,
+     %Stytch.Response{headers: res.headers, body: atomize_keys(res.body), status: res.status}}
+  end
 
   defp response(res), do: res
+
+  def atomize_keys(map = %{}) do
+    map
+    |> Enum.map(fn {k, v} -> {String.to_atom(k), atomize_keys(v)} end)
+    |> Enum.into(%{})
+  end
+
+  def atomize_keys([head | rest]) do
+    [atomize_keys(head) | atomize_keys(rest)]
+  end
+
+  def atomize_keys(not_a_map) do
+    not_a_map
+  end
 
   defp req(), do: Req.new(base_url: endpoint(), auth: {username(), password()})
   defp endpoint, do: get_env(:endpoint, @endpoint_env_var, @default_endpoint)
