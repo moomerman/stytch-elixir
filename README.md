@@ -50,7 +50,9 @@ response but won't actually send anything.
 
 ```elixir
 Stytch.send_magic_link("sandbox@stytch.com")
+```
 
+```elixir
 Stytch.authenticate_with_magic_link("DOYoip3rvIMMW5lgItikFK-Ak1CfMsgjuiCyI7uuU94=")
 ```
 
