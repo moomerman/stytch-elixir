@@ -13,15 +13,10 @@ defmodule Stytch.Client do
   def post(path, body), do: req() |> Req.post(url: path, json: body) |> response()
 
   defp response({:ok, %Req.Response{status: status} = res}) when status >= 200 and status < 300 do
-    {:ok,
-     %Stytch.Response{headers: res.headers, body: atomize_keys(res.body), status: res.status}}
+    {:ok, atomize_keys(res.body)}
   end
 
-  defp response({:ok, res}) do
-    {:error,
-     %Stytch.Response{headers: res.headers, body: atomize_keys(res.body), status: res.status}}
-  end
-
+  defp response({:ok, res}), do: {:error, atomize_keys(res.body)}
   defp response(res), do: res
 
   defp atomize_keys(map = %{}) do

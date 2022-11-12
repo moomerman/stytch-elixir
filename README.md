@@ -50,6 +50,14 @@ response but won't actually send anything.
 
 ```elixir
 Stytch.send_magic_link("sandbox@stytch.com")
+
+{:ok,
+ %{
+   email_id: "email-test-23873e89-d4ed-4e92-b3b9-e5c7198fa286",
+   request_id: "request-id-test-66d49012-2b36-4835-9093-2a51f4ba3570",
+   status_code: 200,
+   user_id: "user-test-e3795c81-f849-4167-bfda-e4a6e9c280fd"
+ }}
 ```
 
 ```elixir
@@ -72,4 +80,24 @@ Stytch.authenticate_session("WJtR5BCy38Szd5AfoDpf0iqFKEt4EE5JhjlWUY7l3FtY")
 
 ```elixir
 Stytch.create_totp("user-test-e3795c81-f849-4167-bfda-e4a6e9c280fd")
+```
+
+## Handling errors
+
+Succesful API calls return a `{:ok, map()}` response.
+
+If the API returns an error you'll get a `{:error, map()}` response with 
+the error information:
+
+```elixir
+Stytch.authenticate_session("INVALID")
+
+{:error,
+ %{
+   error_message: "Session token format is invalid.",
+   error_type: "invalid_session_token",
+   error_url: "https://stytch.com/docs/api/errors/400",
+   request_id: "request-id-test-f64acf06-8a0a-4b45-9fbd-bfc3b5ca7f50",
+   status_code: 400
+ }}
 ```
