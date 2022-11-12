@@ -44,6 +44,7 @@ The docs can be found at <https://hexdocs.pm/stytch>.
 ```elixir
 Stytch.send_magic_link("sandbox@stytch.com")
 
+Stytch.authenticate_with_magic_link("DOYoip3rvIMMW5lgItikFK-Ak1CfMsgjuiCyI7uuU94=")
 ```
 
 ### One-time Passcodes (OTP)
@@ -52,8 +53,14 @@ Stytch.send_magic_link("sandbox@stytch.com")
 Stytch.send_otp_by_sms("+10000000000")
 ```
 
+### Sessions
+
+```elixir
+Stytch.authenticate_session("WJtR5BCy38Szd5AfoDpf0iqFKEt4EE5JhjlWUY7l3FtY")
+```
+
 ### Time-based one-time passcodes (TOTP)
 
 ```elixir
-Stytch.create_totp("user-id-....")
+Stytch.create_totp("user-test-e3795c81-f849-4167-bfda-e4a6e9c280fd")
 ```
