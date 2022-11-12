@@ -35,7 +35,11 @@ prod environments is https://api.stytch.com/v1 but these can be
 overridden by the `STYTCH_ENDPOINT` environment variable or `:endpoint`
 config option.
 
-The docs can be found at <https://hexdocs.pm/stytch>.
+## Documentation
+
+The package docs can be found at <https://hexdocs.pm/stytch>.  
+
+The full Stytch API documentation can be found at <https://stytch.com/docs/api>.
 
 ## Examples
 
