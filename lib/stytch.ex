@@ -8,7 +8,7 @@ defmodule Stytch do
   @doc """
     See: https://stytch.com/docs/api/get-user
   """
-  def get_user(user_id) do
+  def get_user(user_id) when is_binary(user_id) do
     "/users/#{user_id}"
     |> get()
   end
@@ -26,7 +26,7 @@ defmodule Stytch do
   @doc """
     See: https://stytch.com/docs/api/log-in-or-create-user-by-email
   """
-  def login_or_create_user_by_email(email, opts \\ %{}) when is_binary(email) do
+  def login_or_create_user_by_email(email, opts \\ %{}) when is_binary(email) and is_map(opts) do
     "/magic_links/email/login_or_create"
     |> post(%{email: email} |> Map.merge(opts))
   end
@@ -34,7 +34,7 @@ defmodule Stytch do
   @doc """
     See: https://stytch.com/docs/api/invite-by-email
   """
-  def invite_user_by_email(email, opts \\ %{}) do
+  def invite_user_by_email(email, opts \\ %{}) when is_binary(email) and is_map(opts) do
     "/magic_links/email/invite"
     |> post(%{email: email} |> Map.merge(opts))
   end
@@ -50,7 +50,8 @@ defmodule Stytch do
   @doc """
     See: https://stytch.com/docs/api/create-magic-link
   """
-  def create_embeddable_magic_link(user_id, opts \\ %{}) do
+  def create_embeddable_magic_link(user_id, opts \\ %{})
+      when is_binary(user_id) and is_map(opts) do
     "/magic_links"
     |> post(%{user_id: user_id} |> Map.merge(opts))
   end
@@ -58,7 +59,7 @@ defmodule Stytch do
   @doc """
     See: https://stytch.com/docs/api/authenticate-magic-link
   """
-  def authenticate_with_magic_link(token, opts \\ %{}) do
+  def authenticate_with_magic_link(token, opts \\ %{}) when is_binary(token) and is_map(opts) do
     "/magic_links/authenticate"
     |> post(%{token: token} |> Map.merge(opts))
   end
@@ -68,7 +69,7 @@ defmodule Stytch do
   @doc """
     See: https://stytch.com/docs/api/send-otp-by-sms
   """
-  def send_otp_by_sms(phone_number, opts \\ %{}) do
+  def send_otp_by_sms(phone_number, opts \\ %{}) when is_binary(phone_number) and is_map(opts) do
     "/otps/sms/send"
     |> post(%{phone_number: phone_number} |> Map.merge(opts))
   end
@@ -76,7 +77,8 @@ defmodule Stytch do
   @doc """
     See: https://stytch.com/docs/api/log-in-or-create-user-by-sms
   """
-  def login_or_create_user_by_sms(phone_number, opts \\ %{}) do
+  def login_or_create_user_by_sms(phone_number, opts \\ %{})
+      when is_binary(phone_number) and is_map(opts) do
     "/otps/sms/login_or_create"
     |> post(%{phone_number: phone_number} |> Map.merge(opts))
   end
@@ -95,8 +97,8 @@ defmodule Stytch do
     See: https://stytch.com/docs/api/password-create
   """
   def create_user_with_password(email, password, opts \\ %{})
-      when is_binary(email) and is_binary(password)
-      when is_map(opts) do
+      when is_binary(email) and is_binary(password) and
+             is_map(opts) do
     "/passwords"
     |> post(%{email: email, password: password} |> Map.merge(opts))
   end
@@ -123,7 +125,7 @@ defmodule Stytch do
     See: https://stytch.com/docs/api/password-email-reset
   """
   def reset_password_by_email(token, password, opts \\ %{})
-      when is_binary(token) and is_binary(password) do
+      when is_binary(token) and is_binary(password) and is_map(opts) do
     "/passwords/email/reset"
     |> post(%{token: token, password: password} |> Map.merge(opts))
   end
@@ -140,8 +142,6 @@ defmodule Stytch do
   @doc """
     See: https://stytch.com/docs/api/password-session-reset
   """
-  @spec reset_password_by_session(session_token :: String.t(), password :: String.t()) ::
-          Req.Response.t()
   def reset_password_by_session(session_token, password)
       when is_binary(session_token) and is_binary(password) do
     "/passwords/session/reset"
@@ -196,7 +196,7 @@ defmodule Stytch do
   @doc """
     See: https://stytch.com/docs/api/totp-create
   """
-  def create_totp(user_id, opts \\ %{}) do
+  def create_totp(user_id, opts \\ %{}) when is_binary(user_id) and is_map(opts) do
     "/totps"
     |> post(%{user_id: user_id} |> Map.merge(opts))
   end
@@ -204,7 +204,7 @@ defmodule Stytch do
   @doc """
     See: https://stytch.com/docs/api/totp-authenticate
   """
-  def authenticate_totp(user_id, totp_code) do
+  def authenticate_totp(user_id, totp_code) when is_binary(user_id) and is_binary(totp_code) do
     "/totps/authenticate"
     |> post(%{user_id: user_id, totp_code: totp_code})
   end
@@ -212,7 +212,7 @@ defmodule Stytch do
   @doc """
     See: https://stytch.com/docs/api/totp-get-recovery-codes
   """
-  def get_totp_recovery_codes(user_id) do
+  def get_totp_recovery_codes(user_id) when is_binary(user_id) do
     "/totps/recovery_codes"
     |> post(%{user_id: user_id})
   end
@@ -220,7 +220,8 @@ defmodule Stytch do
   @doc """
     See: https://stytch.com/docs/api/totp-recover
   """
-  def recover_totp(user_id, recovery_code, opts \\ %{}) do
+  def recover_totp(user_id, recovery_code, opts \\ %{})
+      when is_binary(user_id) and is_binary(recovery_code) and is_map(opts) do
     "/totps/recover"
     |> post(%{user_id: user_id, recovery_code: recovery_code} |> Map.merge(opts))
   end

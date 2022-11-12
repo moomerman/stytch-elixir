@@ -1,6 +1,6 @@
 # Stytch
 
-An Elixir API client for [Stytch](https://stytch.com)
+An Elixir API client for [Stytch](https://stytch.com/docs/api)
 
 ## Installation
 
@@ -38,6 +38,9 @@ config option.
 The docs can be found at <https://hexdocs.pm/stytch>.
 
 ## Examples
+
+These examples use sandbox values provided by Stytch so will return a valid
+response but won't actually send anything.
 
 ### Magic Links
 
