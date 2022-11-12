@@ -1,11 +1,11 @@
 # Stytch
 
-**TODO: Add description**
+An Elixir API client for [Stytch](https://stytch.com)
 
 ## Installation
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `stytch` to your list of dependencies in `mix.exs`:
+The package can be installed by adding `stytch` to your list of 
+dependencies in `mix.exs`:
 
 ```elixir
 def deps do
@@ -15,7 +15,32 @@ def deps do
 end
 ```
 
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at <https://hexdocs.pm/stytch>.
+## Configuration
 
+To make API calls you need to configure your Stytch `project_id` and `secret`.
+
+If you set the `STYTCH_PROJECT_ID` and `STYTCH_SECRET` environment variables
+then they will be used.
+
+You can also override the configuration in your application config:
+
+```elixir
+config :stytch,
+  project_id: "my-project-id",
+  secret: "my-secret"
+```
+
+The default endpoint for API requests is https://test.stytch.com/v1 and in 
+prod environments is https://api.stytch.com/v1 but these can be
+overridden by the `STYTCH_ENDPOINT` environment variable or `:endpoint`
+config option.
+
+The docs can be found at <https://hexdocs.pm/stytch>.
+
+## Examples
+
+### Magic Links
+
+```
+Stytch.Client.send_magic_link("sandbox@stytch.com")
+```
