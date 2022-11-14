@@ -11,6 +11,7 @@ defmodule Stytch.Client do
 
   def get(path, params \\ []), do: req() |> Req.get(url: path, params: params) |> response()
   def post(path, body), do: req() |> Req.post(url: path, json: body) |> response()
+  def delete(path, params \\ []), do: req() |> Req.delete(url: path, params: params) |> response()
 
   defp response({:ok, %Req.Response{status: status} = res}) when status >= 200 and status < 300 do
     {:ok, atomize_keys(res.body)}

@@ -14,6 +14,14 @@ defmodule Stytch do
     |> Client.get()
   end
 
+  @doc """
+    See: https://stytch.com/docs/api/delete-user-totp
+  """
+  def delete_user_totp(totp_id) when is_binary(totp_id) do
+    "/users/totps/#{totp_id}"
+    |> Client.delete()
+  end
+
   # MAGIC LINKS
 
   @doc """
