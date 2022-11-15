@@ -90,7 +90,7 @@ defmodule Stytch do
   @doc """
     See: https://stytch.com/docs/api/get-pending-users
   """
-  def get_pending_users(opts \\ %{}) do
+  def get_pending_users(opts \\ %{}) when is_map(opts) do
     "/users/pending"
     |> Client.get(opts)
   end
@@ -207,6 +207,25 @@ defmodule Stytch do
   def authenticate_otp(method_id, code) when is_binary(method_id) and is_binary(code) do
     "/otps/authenticate"
     |> Client.post(%{method_id: method_id, code: code})
+  end
+
+  # OAUTH
+
+  @doc """
+    See: https://stytch.com/docs/api/oauth-overview
+  """
+  def start_oauth_url(provider, public_token, params \\ [])
+      when is_binary(provider) and is_binary(public_token) and is_list(params) do
+    "/public/oauth/#{provider}/start"
+    |> Client.url(Keyword.merge([public_token: public_token], params))
+  end
+
+  @doc """
+    See: https://stytch.com/docs/api/oauth-authenticate
+  """
+  def authenticate_oauth(token, opts \\ %{}) when is_binary(token) and is_map(opts) do
+    "/oauth/authenticate"
+    |> Client.post(%{token: token} |> Map.merge(opts))
   end
 
   # PASSWORDS
