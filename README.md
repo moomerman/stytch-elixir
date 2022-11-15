@@ -49,7 +49,7 @@ response but won't actually send anything.
 ### Magic Links
 
 ```elixir
-Stytch.send_magic_link("sandbox@stytch.com")
+Stytch.send_magic_link_by_email("sandbox@stytch.com")
 
 {:ok,
  %{
@@ -61,7 +61,7 @@ Stytch.send_magic_link("sandbox@stytch.com")
 ```
 
 ```elixir
-Stytch.authenticate_with_magic_link("DOYoip3rvIMMW5lgItikFK-Ak1CfMsgjuiCyI7uuU94=")
+Stytch.authenticate_magic_link("DOYoip3rvIMMW5lgItikFK-Ak1CfMsgjuiCyI7uuU94=")
 ```
 
 ### One-time Passcodes (OTP)
