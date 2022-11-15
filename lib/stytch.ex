@@ -7,6 +7,31 @@ defmodule Stytch do
   # USERS
 
   @doc """
+    See: https://stytch.com/docs/api/create-user
+  """
+  def create_user_with_email(email, opts \\ %{}) when is_binary(email) and is_map(opts) do
+    "/users"
+    |> Client.post(%{email: email} |> Map.merge(opts))
+  end
+
+  @doc """
+    See: https://stytch.com/docs/api/create-user
+  """
+  def create_user_with_phone_number(phone_number, opts \\ %{})
+      when is_binary(phone_number) and is_map(opts) do
+    "/users"
+    |> Client.post(%{phone_number: phone_number} |> Map.merge(opts))
+  end
+
+  @doc """
+    See: https://stytch.com/docs/api/search-users
+  """
+  def search_users(opts \\ %{}) when is_map(opts) do
+    "/users/search"
+    |> Client.post(opts)
+  end
+
+  @doc """
     See: https://stytch.com/docs/api/get-user
   """
   def get_user(user_id) when is_binary(user_id) do
@@ -15,11 +40,59 @@ defmodule Stytch do
   end
 
   @doc """
+    See: https://stytch.com/docs/api/update-user
+  """
+  def update_user(user_id, opts \\ %{}) when is_binary(user_id) and is_map(opts) do
+    "/users/#{user_id}"
+    |> Client.put(opts)
+  end
+
+  @doc """
+    https://stytch.com/docs/api/delete-user
+  """
+  def delete_user(user_id) when is_binary(user_id) do
+    "/users/#{user_id}"
+    |> Client.delete()
+  end
+
+  @doc """
+    See: https://stytch.com/docs/api/delete-user-email
+  """
+  def delete_user_email(email_id) when is_binary(email_id) do
+    "/users/emails/#{email_id}"
+    |> Client.delete()
+  end
+
+  @doc """
+    See: https://stytch.com/docs/api/delete-user-phone-number
+  """
+  def delete_user_phone_number(phone_id) when is_binary(phone_id) do
+    "/users/phone_numbers/#{phone_id}"
+    |> Client.delete()
+  end
+
+  @doc """
     See: https://stytch.com/docs/api/delete-user-totp
   """
   def delete_user_totp(totp_id) when is_binary(totp_id) do
     "/users/totps/#{totp_id}"
     |> Client.delete()
+  end
+
+  @doc """
+    See: https://stytch.com/docs/api/delete-user-password
+  """
+  def delete_user_password(password_id) when is_binary(password_id) do
+    "/users/passwords/#{password_id}"
+    |> Client.delete()
+  end
+
+  @doc """
+    See: https://stytch.com/docs/api/get-pending-users
+  """
+  def get_pending_users(opts \\ %{}) do
+    "/users/pending"
+    |> Client.get(opts)
   end
 
   # MAGIC LINKS
