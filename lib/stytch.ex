@@ -332,6 +332,44 @@ defmodule Stytch do
     |> Client.post(%{session_id: session_id})
   end
 
+  # WEBAUTHN
+
+  @doc """
+    See: https://stytch.com/docs/api/webauthn-register-start
+  """
+  def start_webauthn_registration(user_id, domain, opts \\ %{})
+      when is_binary(user_id) and is_binary(domain) and is_map(opts) do
+    "/webauthn/register/start"
+    |> Client.post(%{user_id: user_id, domain: domain} |> Map.merge(opts))
+  end
+
+  @doc """
+    See: https://stytch.com/docs/api/webauthn-register
+  """
+  def webauthn_registration(user_id, public_key_credential)
+      when is_binary(user_id) and is_binary(public_key_credential) do
+    "/webauthn/register"
+    |> Client.post(%{user_id: user_id, public_key_credential: public_key_credential})
+  end
+
+  @doc """
+    See: https://stytch.com/docs/api/webauthn-authenticate-start
+  """
+  def start_webauthn_authentication(user_id, domain)
+      when is_binary(user_id) and is_binary(domain) do
+    "/webauthn/authenticate/start"
+    |> Client.post(%{user_id: user_id, domain: domain})
+  end
+
+  @doc """
+    See: https://stytch.com/docs/api/webauthn-authenticate
+  """
+  def authenticate_webauthn(public_key_credential, opts \\ %{})
+      when is_binary(public_key_credential) and is_map(opts) do
+    "/webauthn/authenticate"
+    |> Client.post(%{public_key_credential: public_key_credential} |> Map.merge(opts))
+  end
+
   # TIME-BASED ONE-TIME PASSCODS (TOTP)
 
   @doc """
