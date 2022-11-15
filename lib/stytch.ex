@@ -9,7 +9,7 @@ defmodule Stytch do
   @doc """
     See: https://stytch.com/docs/api/create-user
   """
-  def create_user_with_email(email, opts \\ %{}) when is_binary(email) and is_map(opts) do
+  def create_user_by_email(email, opts \\ %{}) when is_binary(email) and is_map(opts) do
     "/users"
     |> Client.post(%{email: email} |> Map.merge(opts))
   end
@@ -17,7 +17,7 @@ defmodule Stytch do
   @doc """
     See: https://stytch.com/docs/api/create-user
   """
-  def create_user_with_phone_number(phone_number, opts \\ %{})
+  def create_user_by_phone_number(phone_number, opts \\ %{})
       when is_binary(phone_number) and is_map(opts) do
     "/users"
     |> Client.post(%{phone_number: phone_number} |> Map.merge(opts))
@@ -100,7 +100,7 @@ defmodule Stytch do
   @doc """
     See: https://stytch.com/docs/api/send-by-email
   """
-  def send_magic_link(email, opts \\ %{}) when is_binary(email) and is_map(opts) do
+  def send_magic_link_by_email(email, opts \\ %{}) when is_binary(email) and is_map(opts) do
     "/magic_links/email/send"
     |> Client.post(%{email: email} |> Map.merge(opts))
   end
@@ -124,7 +124,7 @@ defmodule Stytch do
   @doc """
     See: https://stytch.com/docs/api/revoke-pending-invite
   """
-  def revoke_invite(email) when is_binary(email) do
+  def revoke_pending_invite(email) when is_binary(email) do
     "/magic_links/email"
     |> Client.post(%{email: email})
   end
@@ -141,7 +141,7 @@ defmodule Stytch do
   @doc """
     See: https://stytch.com/docs/api/authenticate-magic-link
   """
-  def authenticate_with_magic_link(token, opts \\ %{}) when is_binary(token) and is_map(opts) do
+  def authenticate_magic_link(token, opts \\ %{}) when is_binary(token) and is_map(opts) do
     "/magic_links/authenticate"
     |> Client.post(%{token: token} |> Map.merge(opts))
   end
@@ -163,6 +163,42 @@ defmodule Stytch do
       when is_binary(phone_number) and is_map(opts) do
     "/otps/sms/login_or_create"
     |> Client.post(%{phone_number: phone_number} |> Map.merge(opts))
+  end
+
+  @doc """
+    See: https://stytch.com/docs/api/whatsapp-send
+  """
+  def send_otp_by_whatsapp(phone_number, opts \\ %{})
+      when is_binary(phone_number) and is_map(opts) do
+    "/otps/whatsapp/send"
+    |> Client.post(%{phone_number: phone_number} |> Map.merge(opts))
+  end
+
+  @doc """
+    See: https://stytch.com/docs/api/log-in-or-create-user-by-whatsapp
+  """
+  def login_or_create_user_by_whatsapp(phone_number, opts \\ %{})
+      when is_binary(phone_number) and is_map(opts) do
+    "/otps/whatsapp/login_or_create"
+    |> Client.post(%{phone_number: phone_number} |> Map.merge(opts))
+  end
+
+  @doc """
+    See: https://stytch.com/docs/api/email-send
+  """
+  def send_otp_by_email(email, opts \\ %{})
+      when is_binary(email) and is_map(opts) do
+    "/otps/email/send"
+    |> Client.post(%{email: email} |> Map.merge(opts))
+  end
+
+  @doc """
+    See: https://stytch.com/docs/api/log-in-or-create-user-by-email
+  """
+  def login_or_create_user_by_email_otp(email, opts \\ %{})
+      when is_binary(email) and is_map(opts) do
+    "/otps/email/login_or_create"
+    |> Client.post(%{email: email} |> Map.merge(opts))
   end
 
   @doc """
