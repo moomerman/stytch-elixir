@@ -204,9 +204,10 @@ defmodule Stytch do
   @doc """
     See: https://stytch.com/docs/api/authenticate-otp
   """
-  def authenticate_otp(method_id, code) when is_binary(method_id) and is_binary(code) do
+  def authenticate_otp(method_id, code, opts \\ %{})
+      when is_binary(method_id) and is_binary(code) and is_map(opts) do
     "/otps/authenticate"
-    |> Client.post(%{method_id: method_id, code: code})
+    |> Client.post(%{method_id: method_id, code: code} |> Map.merge(opts))
   end
 
   # OAUTH
