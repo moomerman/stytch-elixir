@@ -324,6 +324,9 @@ defmodule Stytch do
     |> Client.post(%{session_token: session_token} |> Map.merge(opts))
   end
 
+  # authenticate_session_by_jwt
+  # authenticate_session_by_token
+
   @doc """
     See: https://stytch.com/docs/api/session-revoke
   """
@@ -331,6 +334,10 @@ defmodule Stytch do
     "/sessions/revoke"
     |> Client.post(%{session_id: session_id})
   end
+
+  # revoke_session_by_id
+  # revoke_session_by_jwt
+  # revoke_session_by_token
 
   # WEBAUTHN
 
