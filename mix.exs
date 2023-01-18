@@ -2,7 +2,7 @@ defmodule Stytch.MixProject do
   use Mix.Project
 
   @source_url "https://github.com/moomerman/stytch-elixir"
-  @version "0.2.2"
+  @version "0.2.3"
 
   def project do
     [
