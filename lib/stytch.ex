@@ -412,4 +412,92 @@ defmodule Stytch do
     "/totps/recover"
     |> Client.post(%{user_id: user_id, recovery_code: recovery_code} |> Map.merge(opts))
   end
+
+  @doc """
+    See: https://stytch.com/docs/b2b/api/create-organization
+  """
+  def b2b_create_organization(opts \\ %{}) when is_map(opts) do
+    "/b2b/organizations"
+    |> Client.post(opts)
+  end
+
+  @doc """
+    See: https://stytch.com/docs/b2b/api/search-organizations
+  """
+  def b2b_search_organizations(opts \\ %{}) when is_map(opts) do
+    "/b2b/organizations/search"
+    |> Client.post(opts)
+  end
+
+  @doc """
+    See: https://stytch.com/docs/b2b/api/email-reset-start
+  """
+  def b2b_email_password_reset_start(opts \\ %{}) when is_map(opts) do
+    "/b2b/passwords/email/reset/start"
+    |> Client.post(opts)
+  end
+
+  @doc """
+    See: https://stytch.com/docs/b2b/api/email-reset-start
+  """
+  def b2b_email_password_reset(opts \\ %{}) when is_map(opts) do
+    "/b2b/passwords/email/reset"
+    |> Client.post(opts)
+  end
+
+  @doc """
+    See: https://stytch.com/docs/b2b/api/authenticate-magic-link
+  """
+  def b2b_magic_link_authenticate(opts \\ %{}) when is_map(opts) do
+    "/b2b/magic_links/authenticate"
+    |> Client.post(opts)
+  end
+
+  @doc """
+    See: https://stytch.com/docs/b2b/api/passwords-authenticate
+  """
+  def b2b_passwords_authenticate(opts \\ %{}) when is_map(opts) do
+    "/b2b/passwords/authenticate"
+    |> Client.post(opts)
+  end
+
+  @doc """
+    See: https://stytch.com/docs/b2b/api/create-member
+  """
+  def b2b_create_member(org_id, opts \\ %{}) when is_map(opts) do
+    "/b2b/organizations/#{org_id}/members"
+    |> Client.post(opts)
+  end
+
+  @doc """
+    See: https://stytch.com/docs/b2b/api/update-member
+  """
+  def b2b_update_member(org_id, member_id, opts \\ %{}) when is_map(opts) do
+    "/b2b/organizations/#{org_id}/members/#{member_id}"
+    |> Client.put(opts)
+  end
+
+  @doc """
+    See: https://stytch.com/docs/b2b/api/authenticate-session
+  """
+  def b2b_sessions_authenticate(opts \\ %{}) when is_map(opts) do
+    "/b2b/sessions/authenticate"
+    |> Client.post(opts)
+  end
+
+  @doc """
+    See: https://stytch.com/docs/b2b/api/revoke-session
+  """
+  def b2b_sessions_reset(opts \\ %{}) when is_map(opts) do
+    "/b2b/sessions/revoke"
+    |> Client.post(opts)
+  end
+
+  @doc """
+    See: https://stytch.com/docs/b2b/api/migrate
+  """
+  def b2b_passwords_migrate(opts \\ %{}) when is_map(opts) do
+    "/b2b/passwords/migrate"
+    |> Client.post(opts)
+  end
 end
