@@ -2,7 +2,7 @@ defmodule Stytch.MixProject do
   use Mix.Project
 
   @source_url "https://github.com/moomerman/stytch-elixir"
-  @version "0.2.3"
+  @version "0.3.0"
 
   def project do
     [
@@ -28,7 +28,7 @@ defmodule Stytch.MixProject do
 
   defp package() do
     [
-      files: ~w(lib config mix.exs README* LICENSE*),
+      files: ~w(lib config mix.exs README* LICENSE* CHANGELOG*),
       links: %{GitHub: @source_url},
       licenses: ["MIT"]
     ]
@@ -38,6 +38,7 @@ defmodule Stytch.MixProject do
     [
       extras: [
         "README.md": [title: "Overview"],
+        "CHANGELOG.md": [title: "Changelog"],
         LICENSE: [title: "License"]
       ],
       main: "readme"
@@ -48,7 +49,7 @@ defmodule Stytch.MixProject do
   defp deps do
     [
       {:req, "~> 0.3.1"},
-      {:ex_doc, "0.29.0", only: :dev, runtime: false}
+      {:ex_doc, "~> 0.29", only: :dev, runtime: false}
     ]
   end
 end
