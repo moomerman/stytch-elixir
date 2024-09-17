@@ -414,6 +414,14 @@ defmodule Stytch do
   end
 
   @doc """
+    See: https://stytch.com/docs/b2b/api/sso-authenticate
+  """
+  def b2b_authenticate_sso(token, opts \\ %{}) when is_binary(token) and is_map(opts) do
+    "/b2b/sso/authenticate"
+    |> Client.post(%{sso_token: token} |> Map.merge(opts))
+  end
+
+  @doc """
     See: https://stytch.com/docs/b2b/api/create-organization
   """
   def b2b_create_organization(opts \\ %{}) when is_map(opts) do
