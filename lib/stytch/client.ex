@@ -31,7 +31,7 @@ defmodule Stytch.Client do
   defp atomize_keys([head | rest]), do: [atomize_keys(head) | atomize_keys(rest)]
   defp atomize_keys(not_a_map), do: not_a_map
 
-  defp req(), do: Req.new(base_url: endpoint(), auth: {username(), password()})
+  defp req(), do: Req.new(base_url: endpoint(), auth: {:basic, "#{username()}:#{password()}"})
   defp endpoint, do: get_env(:endpoint, @endpoint_env_var, @default_endpoint)
   defp username, do: get_env(:project_id, @project_id_env_var)
   defp password, do: get_env(:secret, @secret_env_var)
