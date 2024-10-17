@@ -430,6 +430,14 @@ defmodule Stytch do
   end
 
   @doc """
+    See: https://stytch.com/docs/b2b/api/authenticate-discovery-oauth
+  """
+  def b2b_authenticate_discovery_oauth(token, opts \\ %{}) when is_binary(token) and is_map(opts) do
+    "/b2b/oauth/discovery/authenticate"
+    |> Client.post(%{discovery_oauth_token: token} |> Map.merge(opts))
+  end
+
+  @doc """
     See: https://stytch.com/docs/b2b/api/create-organization
   """
   def b2b_create_organization(opts \\ %{}) when is_map(opts) do
