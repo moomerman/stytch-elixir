@@ -1,5 +1,13 @@
 # Changelog
 
+## v0.4.4
+
+  * Support authenticate-discovery-oauth (thanks @mbenatti)
+
+## v0.4.2
+
+  * Support b2b authenticate oauth (thanks @mbenatti)
+
 ## v0.4.0
 
   * Upgrade dependencies and fix warnings
